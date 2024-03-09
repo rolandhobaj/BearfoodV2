@@ -8,19 +8,29 @@ interface CardProps {
 
 const RecipeCard: React.FC<CardProps> = ({ title }) => {
   return (
-    <Card>
+    <Card containerStyle={styles.card}>
       <Card.Image 
-       source={{ uri: "https://www.justonecookbook.com/wp-content/uploads/2020/01/Sushi-Rolls-Maki-Sushi-%E2%80%93-Hosomaki-1106-II.jpg" }}
+       source={{ uri: "https://promova.com/content/fast_food_names_d368a9810d.png" }}
        style={styles.cardImage} />
-      <Card.Title >{title}</Card.Title>
+      <Card.Title style={styles.text}>{title}</Card.Title>
     </Card>
   );
 };
 
 const styles = StyleSheet.create({
-  cardImage: {
-    height: 200, // Adjust the height as needed
+  card: {
+    width: '48%',
+    marginBottom:12,
+    backgroundColor: 'rgba(18,57,6,0.35)'
   },
+  cardImage: {
+    borderRadius: 10,
+  },
+  text: {
+    marginTop:15,
+    color: 'white',
+    fontSize: 25
+  }
 });
 
 export default RecipeCard;
