@@ -4,14 +4,20 @@ import {
   ImageBackground
 } from 'react-native';
 
-import RecipeCard from './src/RecipeCard';
+import RecipeList from './src/RecipeList';
+import { CardItem } from './src/CardItem';
 
 function App(): React.JSX.Element {
+
+  const recipes: CardItem[] = [
+    {id : "13", title: "Leves"},
+    {id : "14", title: "Főétel"},
+    {id : "15", title: "Desszert"}
+  ] ;
+
   return (
       <ImageBackground source={require('./resources/bg.png')} resizeMode="cover" style={styles.image}>
-        <RecipeCard title='This is a recipe'/>
-        <RecipeCard title='This is a recipe'/>
-        <RecipeCard title='This is a recipe'/>
+        <RecipeList recipes={recipes}/>
       </ImageBackground>
   );
 }

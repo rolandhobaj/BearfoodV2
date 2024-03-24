@@ -19,7 +19,7 @@ const RecipeCard: React.FC<CardProps> = ({ title }) => {
 
 const styles = StyleSheet.create({
   card: {
-    width: '48%',
+    width: '42%',
     marginBottom:12,
     backgroundColor: 'rgba(18,57,6,0.35)'
   },
