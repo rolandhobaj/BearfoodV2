@@ -14,6 +14,7 @@ const AutoFillTextBox: React.FC<AutoFillTextBoxProps> = ({ options, onOptionSele
     setText(inputText);
     // Show options when input text is not empty
     setShowOptions(!!inputText);
+    onOptionSelected(inputText);
   };
   
   const handleOptionSelect = (option: string) => {
@@ -26,6 +27,7 @@ const AutoFillTextBox: React.FC<AutoFillTextBoxProps> = ({ options, onOptionSele
   const handleClearText = () => {
     setText('');
     setShowOptions(false);
+    onOptionSelected('');
   };
 
   useEffect(() => {
