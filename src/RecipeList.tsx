@@ -39,7 +39,7 @@ const RecipeList: React.FC<CardListProps> = ({ recipes }) => {
     if (searchQuery.length == 0){
       return true;
     }
-    
+
     let title = removeHungarianAccents(recipe.title);
     var searchWord = removeHungarianAccents(searchQuery.toLowerCase());
     if (title.toLowerCase().includes(searchWord)){
@@ -54,7 +54,7 @@ const RecipeList: React.FC<CardListProps> = ({ recipes }) => {
       <AutoFillTextBox options={dropdownItems} onOptionSelected={setSearchQuery} />
       <FlatList
         data={filteredRecipes}
-        renderItem={(renderItem) => <RecipeCard title={renderItem.item.title}/>}
+        renderItem={(renderItem) => <RecipeCard title={renderItem.item.title} imageUri={renderItem.item.imageUri}/>}
         keyExtractor={(item) => item.id}
         numColumns={2}
       />

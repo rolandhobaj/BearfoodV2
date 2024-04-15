@@ -4,13 +4,14 @@ import { Card } from "@rneui/themed";
 
 interface CardProps {
   title: string;
+  imageUri: string;
 }
 
-const RecipeCard: React.FC<CardProps> = ({ title }) => {
+const RecipeCard: React.FC<CardProps> = ({ title, imageUri }) => {
   return (
     <Card containerStyle={styles.card}>
       <Card.Image 
-       source={{ uri: "https://promova.com/content/fast_food_names_d368a9810d.png" }}
+       source={{ uri: imageUri }}
        style={styles.cardImage} />
       <Card.Title style={styles.text}>{title}</Card.Title>
     </Card>

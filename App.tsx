@@ -10,9 +10,9 @@ import { CardItem } from './src/CardItem';
 function App(): React.JSX.Element {
 
   const recipes: CardItem[] = [
-    {id : "13", title: "Pityoklé", tags: ["Leves"]},
-    {id : "14", title: "Sűrű", tags: ["Főétel"]},
-    {id : "15", title: "CukrosPityóka", tags: ["Desszert"]},
+    {id : "13", title: "Pityoklé", tags: ["Leves"], imageUri: "https://promova.com/content/fast_food_names_d368a9810d.png"},
+    {id : "14", title: "Sűrű", tags: ["Főétel"], imageUri: "https://promova.com/content/fast_food_names_d368a9810d.png"},
+    {id : "15", title: "CukrosPityóka", tags: ["Desszert"], imageUri: "https://promova.com/content/fast_food_names_d368a9810d.png"},
   ] ;
 
   return (
