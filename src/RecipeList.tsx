@@ -37,8 +37,12 @@ const RecipeList: React.FC<CardListProps> = ({ recipes }) => {
 
   const filteredRecipes = recipes.filter(recipe => {
     let title = removeHungarianAccents(recipe.title);
-    console.log(title);
-    return title.toLowerCase().includes(removeHungarianAccents(searchQuery.toLowerCase()))
+    var searchWord = removeHungarianAccents(searchQuery.toLowerCase());
+    if (title.toLowerCase().includes(searchWord)){
+      return true;
+    }
+
+    return recipe.tags.some(tag => removeHungarianAccents(tag).toLowerCase().includes(searchWord))
   });
 
   return (
