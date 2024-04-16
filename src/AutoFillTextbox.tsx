@@ -16,13 +16,6 @@ const AutoFillTextBox: React.FC<AutoFillTextBoxProps> = ({ options, onOptionSele
     setShowOptions(!!inputText);
     onOptionSelected(inputText);
   };
-  
-  const handleOptionSelect = (option: string) => {
-    setText(option);
-    setShowOptions(false);
-    onOptionSelected(option);
-    Keyboard.dismiss();
-  };
 
   const handleClearText = () => {
     setText('');
@@ -60,17 +53,22 @@ const AutoFillTextBox: React.FC<AutoFillTextBoxProps> = ({ options, onOptionSele
           </TouchableOpacity>
         )}
       </View>
-      {showOptions && (
-        <FlatList
-          data={options.filter(option => option.toLowerCase().includes(text.toLowerCase()))}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => handleOptionSelect(item)} onFocus={() => console.log("OnFocus" + item)}>
-              <Text style={styles.listText}>{item}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      )}
+
+      <View style={styles.labelsContainer}>
+        <TouchableOpacity onPress={() => handleTextChange('Leves')}>
+          <Text style={styles.label}>Leves</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleTextChange('Regnyuzsi')}>
+          <Text style={styles.label}>Főétel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleTextChange('Főétel')}>
+          <Text style={styles.label}>Főétel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleTextChange('Desszert')}>
+          <Text style={styles.label}>Desszert</Text>
+        </TouchableOpacity>
+      </View>
+
     </View>
   );
 };
@@ -94,7 +92,25 @@ const styles = StyleSheet.create({
         borderBottomWidth:2,
         paddingLeft:14,
         fontSize: 20
-      }
+      },
+    labelsContainer: {
+        flexDirection: 'row',
+        margin:10,
+        justifyContent: 'space-between',
+      },
+    label: {
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        backgroundColor: 'white',
+        borderRadius: 5,
+        fontSize: 20,
+        borderColor: 'rgba(18,57,6,0.35)',
+        borderWidth: 3,
+        verticalAlign: 'middle',
+        marginHorizontal: 5,
+        textAlign: 'center',
+        color:'rgba(18,57,6,1)'
+      },
   });
 
 export default AutoFillTextBox;
