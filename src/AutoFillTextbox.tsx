@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextInput, View, FlatList, Text, TouchableOpacity, StyleSheet, Keyboard } from 'react-native';
+import RecipeService from './Service/RecipeService';
 
 interface AutoFillTextBoxProps {
   options: string[];
@@ -10,11 +11,13 @@ const AutoFillTextBox: React.FC<AutoFillTextBoxProps> = ({ options, onOptionSele
   const [text, setText] = useState('');
   const [showOptions, setShowOptions] = useState(false);
 
-  const handleTextChange = (inputText: string) => {
+  const handleTextChange = async (inputText: string) => {
     setText(inputText);
     // Show options when input text is not empty
     setShowOptions(!!inputText);
     onOptionSelected(inputText);
+    var r = await RecipeService.getAllRecipe();
+    console.log(r);
   };
 
   const handleClearText = () => {
