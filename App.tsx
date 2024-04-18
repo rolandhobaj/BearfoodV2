@@ -28,7 +28,7 @@ function App(): React.JSX.Element {
   return (
       <ImageBackground source={require('./resources/bg.png')} resizeMode="cover" style={styles.image}>
         <RecipeList recipes={recipes}/>
-        <NewRecipeButton onPress={() => {console.log("hihi")}}/>
+        <NewRecipeButton/>
       </ImageBackground>
   );
 }

@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import ModifyRecipeModal from './ModifyRecipeModal';
 
-interface RoundButtonProps {
-  onPress: () => void;
-}
+const RoundButton: React.FC = ({ }) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false)
 
-const RoundButton: React.FC<RoundButtonProps> = ({ onPress }) => {
   return (
-    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
-      <Text style={styles.buttonText}>+</Text>
+    <TouchableOpacity style={styles.buttonContainer} onPress={() => setIsVisible(true)}>
+        <Text style={styles.buttonText}>+</Text>
+        <ModifyRecipeModal visible={isVisible} onClose={() => setIsVisible(false)}/>
     </TouchableOpacity>
   );
 };
