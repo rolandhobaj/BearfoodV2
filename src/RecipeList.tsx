@@ -24,14 +24,6 @@ function removeHungarianAccents(input: string): string {
   return output;
 }
 
-var dropdownItems = [
-    'Leves',
-    'Főétel',
-    'Regnyuzsi',
-    'Köret',
-    'Desszert',
-];
-
 const RecipeList: React.FC<CardListProps> = ({ recipes }) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -51,7 +43,7 @@ const RecipeList: React.FC<CardListProps> = ({ recipes }) => {
 
   return (
     <View>
-      <AutoFillTextBox options={dropdownItems} onOptionSelected={setSearchQuery} />
+      <AutoFillTextBox onOptionSelected={setSearchQuery} />
       <FlatList
         data={filteredRecipes}
         renderItem={(renderItem) => <RecipeCard title={renderItem.item.title} imageUri={renderItem.item.imageUri}/>}

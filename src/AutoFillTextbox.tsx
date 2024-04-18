@@ -3,43 +3,22 @@ import { TextInput, View, FlatList, Text, TouchableOpacity, StyleSheet, Keyboard
 import RecipeService from './Service/RecipeService';
 
 interface AutoFillTextBoxProps {
-  options: string[];
   onOptionSelected: (option: string) => void;
 }
 
-const AutoFillTextBox: React.FC<AutoFillTextBoxProps> = ({ options, onOptionSelected }) => {
+const AutoFillTextBox: React.FC<AutoFillTextBoxProps> = ({ onOptionSelected }) => {
   const [text, setText] = useState('');
-  const [showOptions, setShowOptions] = useState(false);
 
   const handleTextChange = async (inputText: string) => {
     setText(inputText);
     // Show options when input text is not empty
-    setShowOptions(!!inputText);
     onOptionSelected(inputText);
-    var r = await RecipeService.getAllRecipe();
-    console.log(r);
   };
 
   const handleClearText = () => {
     setText('');
-    setShowOptions(false);
     onOptionSelected('');
   };
-
-  useEffect(() => {
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        console.log('Keyboard hidden');
-        console.log(text);
-        // Do something when the keyboard is hidden
-      }
-    );
-
-    return () => {
-      keyboardDidHideListener.remove();
-    };
-  }, []);
   
   return (
     <View>
