@@ -10,12 +10,16 @@ interface ModalProps {
 const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
   const [name, setName] = useState('');
   const [tags, setTags] = useState('');
+  const [hasNameError, setHasNameError] = useState(false);
+  const [hasTagsError, setHasTagsError] = useState(false);
 
   const handleSave = () => {
-    // Handle save action here
-    console.log('Name:', name);
-    console.log('Tags:', tags);
-    onClose()
+    if (name !== '' && tags !== ''){
+      onClose()
+    }
+
+    setHasNameError(name === '');
+    setHasTagsError(tags === '');
   };
 
   return (
@@ -25,17 +29,17 @@ const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
           <Text style={styles.title}>Recept hozzáadása</Text>
           <Text style={styles.label}>Név</Text>
           <TextInput
-            style={styles.input}
+            style={hasNameError ? styles.inputError : styles.input}
             value={name}
             onChangeText={setName}
-            placeholder="Enter name"
+            placeholder="Név megadása..."
           />
           <Text style={styles.label}>Cimkék</Text>
           <TextInput
-            style={styles.input}
+            style={hasTagsError ? styles.inputError : styles.input}
             value={tags}
             onChangeText={setTags}
-            placeholder="Enter tags"
+            placeholder="Cimke megadása..."
           />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 50, marginBottom: 20 }}>
           <TouchableOpacity onPress={onClose}>
@@ -80,6 +84,13 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  inputError: {
+    borderWidth: 1,
+    borderColor: 'red',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
