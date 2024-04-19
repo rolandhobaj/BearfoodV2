@@ -15,12 +15,18 @@ const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
 
   const handleSave = () => {
     if (name !== '' && tags !== ''){
-      onClose()
+      handleClose()
     }
 
     setHasNameError(name === '');
     setHasTagsError(tags === '');
   };
+
+  const handleClose = () => {
+    setName('');
+    setTags('');
+    onClose();
+  }
 
   return (
     <Modal visible={visible} animationType="slide" transparent>
@@ -42,10 +48,10 @@ const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
             placeholder="Cimke megadása..."
           />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 50, marginBottom: 20 }}>
-          <TouchableOpacity onPress={onClose}>
+          <TouchableOpacity onPress={handleClose}>
             <Icon name='close' color='red' size={60} style={{marginLeft: 10}}/>
           </TouchableOpacity>
-          <TouchableOpacity onPress={onClose}>
+          <TouchableOpacity onPress={handleClose}>
             <Icon name='trash-o' color='grey' size={60} />
           </TouchableOpacity>
           <TouchableOpacity onPress={handleSave}>
