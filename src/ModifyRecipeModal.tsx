@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 interface ModalProps {
@@ -10,21 +10,25 @@ interface ModalProps {
 const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
   const [name, setName] = useState('');
   const [tags, setTags] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [hasNameError, setHasNameError] = useState(false);
   const [hasTagsError, setHasTagsError] = useState(false);
+  const [hasImageUrl, setHasImageUrl] = useState(false);
 
   const handleSave = () => {
-    if (name !== '' && tags !== ''){
+    if (name !== '' && tags !== '' && imageUrl != ''){
       handleClose()
     }
 
     setHasNameError(name === '');
     setHasTagsError(tags === '');
+    setHasImageUrl(imageUrl === '');
   };
 
   const handleClose = () => {
     setName('');
     setTags('');
+    setImageUrl('');
     onClose();
   }
 
@@ -47,6 +51,16 @@ const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
             onChangeText={setTags}
             placeholder="Cimke megadása..."
           />
+          <Text style={styles.label}>Kép URL</Text>
+          <TextInput
+            style={hasTagsError ? styles.inputError : styles.input}
+            value={imageUrl}
+            onChangeText={setImageUrl}
+            placeholder="URL megadása..."
+          />
+          {imageUrl !== '' ? 
+                <Image source={{ uri: imageUrl }} style={{ width: 200, height: 200, marginTop: 10, alignSelf: 'center' }}/> :
+                <Text style={styles.imageLabel}>Válassz ki egy képet!</Text>} 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 50, marginBottom: 20 }}>
           <TouchableOpacity onPress={handleClose}>
             <Icon name='close' color='red' size={60} style={{marginLeft: 10}}/>
@@ -87,6 +101,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 5,
   },
+  imageLabel: {
+    fontSize: 20,
+    marginBottom: 5,
+    textAlign: 'center',
+    marginTop: 10,
+  },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
@@ -101,6 +121,13 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
   },
+  image: {
+    width: 200, 
+    height: 200, 
+    marginTop: 10,
+    alignSelf: 'center',
+    borderWidth: 1, borderColor: 'black'
+  }
 });
 
 export default ModifyRecipeModal;
