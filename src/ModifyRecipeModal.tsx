@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 interface ModalProps {
   visible: boolean;
@@ -36,8 +37,17 @@ const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
             onChangeText={setTags}
             placeholder="Enter tags"
           />
-          <Button title="Save" onPress={handleSave} />
-          <Button title="Close" onPress={onClose} />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 50, marginBottom: 20 }}>
+          <TouchableOpacity onPress={onClose}>
+            <Icon name='close' color='red' size={60} style={{marginLeft: 10}}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onClose}>
+            <Icon name='trash-o' color='grey' size={60} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleSave}>
+            <Icon name='check' color='green' size={60} style={{marginRight: 10}}/>
+          </TouchableOpacity>
+        </View>
         </View>
       </View>
     </Modal>

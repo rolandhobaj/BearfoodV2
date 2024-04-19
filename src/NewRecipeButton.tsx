@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import ModifyRecipeModal from './ModifyRecipeModal';
 
 const RoundButton: React.FC = ({ }) => {
