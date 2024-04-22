@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Clipboard from '@react-native-clipboard/clipboard';
+import { Button } from 'react-native-elements';
 
 interface ModalProps {
   visible: boolean;
@@ -32,6 +34,12 @@ const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
     onClose();
   }
 
+
+  const fetchCopiedImage = async () => {
+    const text = await Clipboard.getImage();
+    setImageUrl(text);
+  };
+
   return (
     <Modal visible={visible} animationType="slide" transparent>
       <View style={styles.modalContainer}>
@@ -58,9 +66,11 @@ const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
             onChangeText={setImageUrl}
             placeholder="URL megadása..."
           />
+          <TouchableOpacity style={styles.button} onPress={fetchCopiedImage}>
+              <Text style={styles.buttonText}>Kép beillesztése a vágólapról</Text>
+          </TouchableOpacity>
           {imageUrl !== '' ? 
-                <Image source={{ uri: imageUrl }} style={{ width: 200, height: 200, marginTop: 10, alignSelf: 'center' }}/> :
-                <Text style={styles.imageLabel}>Válassz ki egy képet!</Text>} 
+                <Image source={{ uri: imageUrl }} style={{ width: 200, height: 200, marginTop: 10, alignSelf: 'center' }}/>: null} 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 50, marginBottom: 20 }}>
           <TouchableOpacity onPress={handleClose}>
             <Icon name='close' color='red' size={60} style={{marginLeft: 10}}/>
@@ -127,7 +137,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'center',
     borderWidth: 1, borderColor: 'black'
-  }
+  },
+  button: {
+    backgroundColor: '#4E787D',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });
 
 export default ModifyRecipeModal;
