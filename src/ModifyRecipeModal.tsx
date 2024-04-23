@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Clipboard from '@react-native-clipboard/clipboard';
-import { Button } from 'react-native-elements';
 
 interface ModalProps {
   visible: boolean;
@@ -60,21 +59,25 @@ const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
             placeholder="Cimke megadása..."
           />
           <Text style={styles.label}>Kép URL</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'stretch' }}>
             <TextInput
               value={imageUrl}
               onChangeText={setImageUrl}
               style={hasImageUrl ? styles.inputError : styles.input}
             />
-            {imageUrl !== '' && (
-            <TouchableOpacity style={{ position: 'relative', right: '5%' }} onPress={() => setImageUrl('')}>
-              <Text style={styles.xButton}>X</Text>
-            </TouchableOpacity>
-            )}
-          </View>
+          <View style={{flexDirection: 'row'}}>
           <TouchableOpacity style={styles.button} onPress={fetchCopiedImage}>
-              <Text style={styles.buttonText}>Kép beillesztése a vágólapról</Text>
+              <Icon name='paste' color='white' size={20} style={{marginLeft: 2, marginRight: 4}}/>
+              <Text style={styles.buttonText}>Beillesztés</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => setImageUrl('')}>
+              <Icon name='trash-o' color='white' size={20} style={{marginLeft: 10, marginRight: 10}}/>
+              <Text style={styles.buttonText}>Törlés</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={fetchCopiedImage}>
+              <Icon name='camera' color='white' size={20} style={{marginLeft: 10, marginRight: 10}}/>
+              <Text style={styles.buttonText}>Fotó</Text>
+          </TouchableOpacity>
+          </View>
           {imageUrl !== '' ? 
                 <Image source={{ uri: imageUrl }} style={styles.image}/>: null} 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 50, marginBottom: 20 }}>
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
-    width: `90%`
+    width: `100%`
   },
   inputError: {
     borderWidth: 1,
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
-    width: `90%`
+    width: `100%`
   },
   image: {
     width: 200, 
@@ -147,13 +150,16 @@ const styles = StyleSheet.create({
     borderWidth: 1, borderColor: 'black'
   },
   button: {
+    flex:1,
     backgroundColor: '#4E787D',
-    padding: 10,
+    padding: 8,
     borderRadius: 5,
+    margin: 2,
+    flexDirection: 'row'
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 13,
     textAlign: 'center',
   },
   xButton:{
