@@ -60,17 +60,23 @@ const ModifyRecipeModal: React.FC<ModalProps> = ({ visible, onClose }) => {
             placeholder="Cimke megadása..."
           />
           <Text style={styles.label}>Kép URL</Text>
-          <TextInput
-            style={hasTagsError ? styles.inputError : styles.input}
-            value={imageUrl}
-            onChangeText={setImageUrl}
-            placeholder="URL megadása..."
-          />
+          <View style={{ flexDirection: 'row', alignItems: 'stretch' }}>
+            <TextInput
+              value={imageUrl}
+              onChangeText={setImageUrl}
+              style={hasImageUrl ? styles.inputError : styles.input}
+            />
+            {imageUrl !== '' && (
+            <TouchableOpacity style={{ position: 'relative', right: '5%' }} onPress={() => setImageUrl('')}>
+              <Text style={styles.xButton}>X</Text>
+            </TouchableOpacity>
+            )}
+          </View>
           <TouchableOpacity style={styles.button} onPress={fetchCopiedImage}>
               <Text style={styles.buttonText}>Kép beillesztése a vágólapról</Text>
           </TouchableOpacity>
           {imageUrl !== '' ? 
-                <Image source={{ uri: imageUrl }} style={{ width: 200, height: 200, marginTop: 10, alignSelf: 'center' }}/>: null} 
+                <Image source={{ uri: imageUrl }} style={styles.image}/>: null} 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 50, marginBottom: 20 }}>
           <TouchableOpacity onPress={handleClose}>
             <Icon name='close' color='red' size={60} style={{marginLeft: 10}}/>
@@ -123,6 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    width: `90%`
   },
   inputError: {
     borderWidth: 1,
@@ -130,6 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    width: `90%`
   },
   image: {
     width: 200, 
@@ -148,6 +156,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  xButton:{
+    fontSize:22,
+    fontWeight:'bold',
+    marginTop:6,
+    marginLeft: 10 
+  }
 });
 
 export default ModifyRecipeModal;
